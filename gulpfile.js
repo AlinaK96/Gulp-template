@@ -8,13 +8,15 @@ const uglify = require('gulp-uglify')
 const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const autoPrefixer = require('gulp-autoprefixer')
+const newer = require('gulp-newer');
 const imageMinimalize = require('gulp-imagemin')
 const htmlmin = require('gulp-htmlmin');
+const browserSync = require('browser-sync').create()
 
 
 const path = {
     html: {
-        src: './*.html',
+        src: 'src/*.html',
         dest: 'dist'
     },
     styles: {
@@ -37,12 +39,13 @@ const path = {
 function html () {
     return gulp.src(path.html.src)
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest(path.html.dest));
+    .pipe(gulp.dest(path.html.dest))
+    .pipe(browserSync.stream())
 }
 
 //очистка файла с финальным кодом dist
 function clean () {
-    return del(['dist'])
+    return del(['dist/*'], '!dist/img' )
 }
 
 //обработка и сборка файлов styles
@@ -62,6 +65,8 @@ function styles (){
     }))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(path.styles.dest))
+    .pipe(browserSync.stream())
+
 }
 
 //обработка и сборка js файлов
@@ -73,16 +78,26 @@ function scripts (){
     .pipe(concat('main.min.js')) //обьеденить и сжать все файл в один
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest(path.scripts.dest))
+    .pipe(browserSync.stream())
+
 }
 
 //при изменении и добавлении код из styles будет выполняться автоматически
 function watch () {
+    browserSync.init({
+        server: {
+            baseDir: "./dist/"
+        }
+    });
+    gulp.watch(path.html.dest).on('change',browserSync.reload);
+    gulp.watch(path.html.src, html);
     gulp.watch(path.styles.src, styles)
     gulp.watch(path.scripts.src, scripts)
 }
 
 function img () {
     return gulp.src(path.images.src)
+    .pipe(newer(path.images.dest))
     .pipe(imageMinimalize({
         progressive: true
     }))

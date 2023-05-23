@@ -18,5 +18,11 @@ gulp-imagemin - сжимание картинок
 gulp-autoprefixer - изменение префиксов для браузеров  
 gulp-imagemin - сжатие размера картинок(7.1.0)  
 gulp-htmlmin - сжатие html файла  
+gulp-newer - отслеживание и сжатие только новых изображений
+Browser Sync - live reload  
 gulp-sourcemaps - Отображение строки из файлов в src, а не в обработанных их dist  
 del Удаление каталогов и файлов (6.1.1)   
+
+
+---------
+gulp-size - трекер размера  
