@@ -8,12 +8,12 @@
 
 **Функционал сборки**
 
-компиляция препроцессора PUG
+
 * минификация HTML (gulp-htmlmin)
 * компиляция препроцессоров LESS, SASS (gulp-less)
 * минификация CSS (gulp-clean-css)
 * автоматическое добавление префиксов CSS (gulp-autoprefixer)
-транспиляция языков Type Script и Coffee Script
+* транспиляция языков Type Script
 * преобразования кода ECMAScript 2015 + в обратно совместимую версию JavaScript с помощью Babel (gulp-babel)
 * минификация JavaScript (gulp-uglify)
 * объединение нескольких файлов JavaScript в один (gulp-concat )
@@ -35,7 +35,7 @@
 
 **Сборка проекта**
 
-1. html (src/ - .html, .pug)  => dist/
+1. html (src/ - .html)  => dist/
 2. Styles (src/styles/ - .css, .sass, .scss, .less) => dist/css/style.min.css	
 3. Scripts (src/scripts/ - .js, .ts, .coffee) => dist/js/main.min.js	
 4. Images (src/img/ - .jpg, .png, .gif) => dist/img/
