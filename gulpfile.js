@@ -28,7 +28,7 @@ const path = {
         dest: 'dist/js/'
     },
     images: {
-        src: 'src/img/*',
+        src: 'src/img/**',
         dest: 'dist/img'
     }
 }
@@ -93,6 +93,7 @@ function watch () {
     gulp.watch(path.html.src, html);
     gulp.watch(path.styles.src, styles)
     gulp.watch(path.scripts.src, scripts)
+    gulp.watch(path.images.src, img)
 }
 
 function img () {
